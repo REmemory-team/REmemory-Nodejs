@@ -29,13 +29,6 @@ pcapsuleRouter.post(
 	asyncHandler(addVoice_c),
 );
 
-// // 음성 저장 라우트
-// pcapsuleRouter.post(
-// 	"/create/voice",
-// 	uploadAudioToS3.single("voice_pcapsule"),
-// 	asyncHandler(addVoice_c),
-// );
-
 pcapsuleRouter.post("/create/savePassword", asyncHandler(savePassword_c));
 
 pcapsuleRouter.get("/retrieve", asyncHandler(readPcs_c));

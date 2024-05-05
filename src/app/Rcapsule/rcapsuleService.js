@@ -116,6 +116,7 @@ export const addTextImage_rcs = async (
 	align_type,
 	from_name,
 ) => {
+	console.log(`service, align_type: ${align_type}`);
 	const connection = await pool.getConnection(async (conn) => conn);
 
 	try {
@@ -124,7 +125,6 @@ export const addTextImage_rcs = async (
 		const isExistCapsule = await checkCapsuleNum_d(connection, capsule_number);
 
 		if (!isExistCapsule) {
-			console.log();
 			throw new BaseError(status.CAPSULE_NOT_FOUND);
 		}
 
@@ -161,6 +161,7 @@ export const addTextImage_rcs = async (
 					align_type,
 				);
 			}
+			console.log(`service, textImageId: ${textImageId}`);
 
 			if (!textImageId) {
 				throw new BaseError(status.INTERNAL_SERVER_ERROR);
@@ -458,6 +459,7 @@ export const readInnerDetailRcs_s = async (wId) => {
 				connection,
 				wData.id,
 			);
+			console.log("text_img_data: ", text_img_data);
 
 			align_type = text_img_data[0].align_type;
 			console.log("align_type: ", align_type);
