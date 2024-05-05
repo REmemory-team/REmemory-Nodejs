@@ -20,22 +20,14 @@ export const userSign = async (req, res) => {
 	const userInfo = await kakaoGetUserInfo(code);
 
 	const userCheck = await emailCheck(userInfo);
-	console.log("1. controller, userData 시작 전");
+
 	const userData = await userSignAction(userCheck, userInfo);
-	console.log("9. controller, userData 후");
+
 	const type = userData.type;
-	console.log("10. 현재 controller, type: ", type);
-	console.log("10. userData.data: ", userData.data);
-	console.log("10. status: ", userData.data.status);
 
 	if (type == 1) {
 		if (userData.data.status === 0) {
-			console.log(
-				"11. 전달값:",
-				response(status.INACTIVE_ACCOUNT, userData.data),
-			);
 			res.status(200).send(response(status.INACTIVE_ACCOUNT, userData.data));
-			console.log("12. 전달완료");
 		} else {
 			res.send(response(status.LOGIN_SUCCESS, userData.data));
 		}
@@ -77,15 +69,14 @@ export const userStatusChange = async (req, res) => {
 // 추가 함수
 export const userActivate = async (req, res) => {
 	const userId = req.body.userId;
-	console.log("user Activate, userId: ", userId);
 
 	if (userId == null) {
 		throw new BaseError(status.FORBIDDEN);
 	} else {
 		await changeUserStatus(userId, 1); // 사용자 상태를 활성화로 변경
-		console.log("changeUserStatus 직후");
+
 		await changeInactiveDate(userId); // inactive_date를 null로 초기화
-		console.log("changeInactiveDate 직후");
+
 		res.send(response(status.SUCCESS, { message: "계정이 활성화되었습니다." }));
 	}
 };
