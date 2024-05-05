@@ -116,7 +116,6 @@ export const addTextImage_rcs = async (
 	align_type,
 	from_name,
 ) => {
-	console.log(`service, align_type: ${align_type}`);
 	const connection = await pool.getConnection(async (conn) => conn);
 
 	try {
@@ -161,7 +160,6 @@ export const addTextImage_rcs = async (
 					align_type,
 				);
 			}
-			console.log(`service, textImageId: ${textImageId}`);
 
 			if (!textImageId) {
 				throw new BaseError(status.INTERNAL_SERVER_ERROR);

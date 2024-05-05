@@ -193,7 +193,6 @@ export const createText_c = async (req, res, next) => {
 		const textImageContent = req.body.contents;
 		const align_type = req.body.align_type;
 		const from_name = req.body.from_name; // rcapsule 글/사진 쓰기의 경우 이게 필요
-		console.log(`Controller, align_type: ${align_type}`);
 
 		const result = await addTextImage_rcs(
 			capsule_number,
@@ -201,7 +200,7 @@ export const createText_c = async (req, res, next) => {
 			align_type,
 			from_name,
 		);
-		console.log(`result 속 align_type: ${result.alignType}`);
+
 		res.status(200).send(
 			response(status.SUCCESS, {
 				result,
