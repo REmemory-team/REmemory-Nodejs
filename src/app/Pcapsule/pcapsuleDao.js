@@ -2,21 +2,16 @@ export const insertPcapsule_d = async (connection, data) => {
 	const status = ["LOCKED", "OPENED"];
 
 	let openDate = new Date(data[4]);
-	console.log("openData: ", openDate);
 
 	let now = new Date();
 
 	const timeOffset = now.getTimezoneOffset() * 60000; // 현재 시간대와 UTC의 차이(밀리초)
 	const kstOffset = 9 * 60 * 60 * 1000; // KST는 UTC+9
 	const curDate = new Date(now.getTime() + timeOffset + kstOffset);
-	console.log("curDate: ", curDate);
 
 	// 날짜만 비교하기 위해 시간을 제거
 	openDate.setHours(0, 0, 0, 0);
 	curDate.setHours(0, 0, 0, 0);
-	console.log("openData: ", openDate);
-	console.log("curDate: ", curDate);
-	console.log("newDate(): ", new Date());
 
 	const query = `INSERT INTO pcapsule 
   (time_capsule_id, capsule_number, pcapsule_password, pcapsule_name, open_date, dear_name, theme, content_type, status, created_at, updated_at) 

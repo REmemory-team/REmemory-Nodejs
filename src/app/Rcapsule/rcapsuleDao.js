@@ -85,7 +85,6 @@ export const insertRcapsule = async (connection, insertData) => {
 	const status = ["LOCKED", "OPENED"];
 
 	let openDate = new Date(insertData[4]);
-	console.log("openData: ", openDate);
 
 	let now = new Date();
 
