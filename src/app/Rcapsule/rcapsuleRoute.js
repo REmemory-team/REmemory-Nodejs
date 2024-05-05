@@ -38,13 +38,6 @@ rcapsuleRouter.post(
 	asyncHandler(addVoiceLetter_c),
 );
 
-// // 음성 쓰기
-// rcapsuleRouter.post(
-// 	"/voice/:rcapsule_number",
-// 	uploadAudioToS3.single("voice_rcapsule"),
-// 	asyncHandler(addVoiceLetter_c),
-// );
-
 //캡슐번호, 롤링페이퍼 url 받기
 rcapsuleRouter.get("/rcapsule/info", asyncHandler(readNumNUrl_c));
 
