@@ -79,8 +79,9 @@ export const userActivate = async (req, res) => {
 	const userId = req.body.userId;
 	console.log("user Activate, userId: ", userId);
 
-	if (userId == null) throw new BaseError(status.BAD_REQUEST);
-	else {
+	if (userId == null) {
+		throw new BaseError(status.FORBIDDEN);
+	} else {
 		await changeUserStatus(userId, 1); // 사용자 상태를 활성화로 변경
 		console.log("changeUserStatus 직후");
 		await changeInactiveDate(userId); // inactive_date를 null로 초기화

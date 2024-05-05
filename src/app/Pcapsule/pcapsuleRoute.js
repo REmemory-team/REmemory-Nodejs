@@ -22,19 +22,19 @@ pcapsuleRouter.post("/create", tokenAuthMiddleware, asyncHandler(createPcs_c));
 
 pcapsuleRouter.post("/create/text_image", asyncHandler(addTextImage_c));
 
-// // 음성 저장 라우트
-// pcapsuleRouter.post(
-// 	"/create/voice",
-// 	upload.single("voice_pcapsule"),
-// 	asyncHandler(addVoice_c),
-// );
-
 // 음성 저장 라우트
 pcapsuleRouter.post(
 	"/create/voice",
-	uploadAudioToS3.single("voice_pcapsule"),
+	upload.single("voice_pcapsule"),
 	asyncHandler(addVoice_c),
 );
+
+// // 음성 저장 라우트
+// pcapsuleRouter.post(
+// 	"/create/voice",
+// 	uploadAudioToS3.single("voice_pcapsule"),
+// 	asyncHandler(addVoice_c),
+// );
 
 pcapsuleRouter.post("/create/savePassword", asyncHandler(savePassword_c));
 
