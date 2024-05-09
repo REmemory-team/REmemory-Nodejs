@@ -1,4 +1,4 @@
-import schedule from "node-schedule";
+import cron from "node-cron";
 import {
 	updateOpenDate_p,
 	deleteOpenCapsule_p,
@@ -9,7 +9,7 @@ import { deleteInactiveUsers } from "../src/app/User/userDao.js";
 export const startSchedulers = () => {
 	// 매일 자정에 실행
 	// timezone: Asia/Seoul로 변경
-	schedule.scheduleJob(
+	cron.schedule(
 		"0 0 * * *",
 		async function () {
 			await updateOpenDate_p();
