@@ -18,26 +18,61 @@ export const getCapsule = async (userId) => {
 	}
 };
 
+// export const getCapsuleType = async (c_num) => {
+// 	try {
+// 		const conn = await pool.getConnection();
+
+// 		const query =
+// 			"SELECT EXISTS(SELECT 1 FROM time_capsule WHERE capsule_number = ?) as isExistCapsule;";
+// 		const [checkCapsuleNumRow] = await conn.query(query, c_num);
+
+// 		if (!checkCapsuleNumRow[0].isExistCapsule) {
+// 			conn.release();
+// 			return -1;
+// 		}
+
+// 		const typeP =
+// 			"SELECT EXISTS(SELECT 1 FROM pcapsule WHERE capsule_number = ?) as isExist";
+
+// 		const [pcapsule] = await conn.query(typeP, [c_num]);
+
+// 		conn.release();
+// 		return pcapsule[0].isExist;
+// 	} catch (err) {
+// 		throw new BaseError(status.BAD_REQUEST);
+// 	}
+// };
+
 export const getCapsuleType = async (c_num) => {
 	try {
 		const conn = await pool.getConnection();
 
 		const query =
 			"SELECT EXISTS(SELECT 1 FROM time_capsule WHERE capsule_number = ?) as isExistCapsule;";
-		const [checkCapsuleNumRow] = await conn.query(query, c_num);
+		const [checkCapsuleNumRow] = await conn.query(query, [c_num]);
 
 		if (!checkCapsuleNumRow[0].isExistCapsule) {
 			conn.release();
-			return -1;
+			return { type: -1 };
 		}
 
 		const typeP =
-			"SELECT EXISTS(SELECT 1 FROM pcapsule WHERE capsule_number = ?) as isExist";
+			"SELECT EXISTS(SELECT 1 FROM pcapsule WHERE capsule_number = ?) as isExist, pcapsule_name as capsule_name FROM pcapsule WHERE capsule_number = ?;";
+		const typeR =
+			"SELECT EXISTS(SELECT 1 FROM rcapsule WHERE capsule_number = ?) as isExist, rcapsule_name as capsule_name FROM rcapsule WHERE capsule_number = ?;";
 
-		const [pcapsule] = await conn.query(typeP, [c_num]);
+		const [pcapsule] = await conn.query(typeP, [c_num, c_num]);
+		const [rcapsule] = await conn.query(typeR, [c_num, c_num]);
 
 		conn.release();
-		return pcapsule[0].isExist;
+
+		if (pcapsule[0].isExist) {
+			return { type: 1, capsule_name: pcapsule[0].capsule_name };
+		} else if (rcapsule[0].isExist) {
+			return { type: 0, capsule_name: rcapsule[0].capsule_name };
+		} else {
+			return { type: -1 };
+		}
 	} catch (err) {
 		throw new BaseError(status.BAD_REQUEST);
 	}

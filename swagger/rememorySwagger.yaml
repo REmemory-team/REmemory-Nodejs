@@ -52,7 +52,7 @@ paths:
           description: Capsule number
           schema:
             type: string
-            example: "testMember1_74177"
+            example: "서린_45329"
         - in: query
           name: capsule_password
           required: true
@@ -80,6 +80,18 @@ paths:
                   message:
                     type: string
                     example: "success!"
+                  result:
+                    type: object
+                    properties:
+                      capsule_number:
+                        type: string
+                        example: "서린_45329"
+                      capsule_name:
+                        type: string
+                        example: "타임캡슐"
+                      capsule_password:
+                        type: string
+                        example: "123456"
 
   /capsule/retrieve/all:
     get:
