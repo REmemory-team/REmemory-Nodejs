@@ -118,6 +118,8 @@ export const createRcapsule = async (req, res, next) => {
 				// ...data,
 				capsule_number: data.capsule_number,
 				rcapsule_id: data.newRcapsuleId,
+				// rcapule_name 반환
+				rcapsule_name: data.rcapsule_name,
 				url: data.rcapsule_url,
 			}),
 		);
