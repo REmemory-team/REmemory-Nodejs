@@ -3,7 +3,6 @@ import AWS from "aws-sdk";
 // dotenv.config();
 
 //aws region 및 자격증명 설정
-// test
 AWS.config.update({
 	accessKeyId: process.env.AWS_ACCESS_KEY_ID,
 	secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
