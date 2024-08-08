@@ -94,6 +94,8 @@ export const readDear_s = async (capsuleNumber) => {
 		const rCapsuleData = await readDear_d(connection, capsuleNumber);
 
 		const resdata = {
+			// uri 요청 시 rcapsule_name 전달
+			rcapsule_name: rCapsuleData.rcapsule_name,
 			dear_name: rCapsuleData.dear_name,
 			capsule_id: rCapsuleData.id,
 			theme: rCapsuleData.theme,
