@@ -100,6 +100,7 @@ export const readDear_s = async (capsuleNumber) => {
 			capsule_id: rCapsuleData.id,
 			theme: rCapsuleData.theme,
 		};
+		console.log("resdata: ", resdata);
 		return resdata;
 	} catch (error) {
 		//에러 발생 시 롤백
